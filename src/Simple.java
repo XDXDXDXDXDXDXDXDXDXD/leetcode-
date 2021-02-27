@@ -608,4 +608,67 @@ public class Simple {
         return res;
     }
 
+    /**
+     * 整数反转 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转
+     * 如果溢出返回0
+     * @param x 给定整数
+     * @return 反转结果
+     */
+    public int reverse(int x) {
+
+        int res = 0;
+        while (x != 0) {
+            int temp = x % 10;
+            x /= 10;
+            if (res > Integer.MAX_VALUE / 10 || (res == Integer.MAX_VALUE / 10 && temp > 7)) return 0;
+            if (res < Integer.MIN_VALUE / 10 || (res == Integer.MIN_VALUE / 10 && temp < -8)) return 0;
+            res = res * 10 + temp;
+        }
+        return res;
+    }
+
+    /**
+     * 删除排序数组中的重复项
+     * 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度
+     * 不要使用额外的数组空间，你必须在原地修改输入数组并在使用O(1)额外空间的条件下完成
+     * @param nums 排序数组
+     * @return 移除后数组的新长度
+     */
+    public int removeDuplicates(int[] nums) {
+
+        int flag = 0;
+        for (int i = 1; i < nums.length; ++i) {
+            int pre = nums[i - 1];
+            int cur = nums[i];
+            if (cur == pre) {
+                flag = cur;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+     * 你可以假设数组中无重复元素
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int searchInsert(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + ((right - left) >> 1);
+            if (target == nums[mid]) {
+                return mid;
+            }
+            else if (target < nums[mid]) {
+                right = mid - 1;
+            }
+            else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+
 }
