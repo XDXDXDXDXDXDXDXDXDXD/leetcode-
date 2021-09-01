@@ -242,4 +242,22 @@ public class Middle {
         //递归完成返回true
         return true;
     }
+
+    /*
+    给你一个字符串 s，找到 s 中最长的回文子串。
+     */
+    public String longestPalindrome(String s) {
+
+        if (s.length() <= 1) {
+            return s;
+        }
+        char[] charArr = s.toCharArray();
+        String res = "";
+        int l = 0;
+
+        for (int i = 0; i < s.length(); ++i) {
+
+        }
+        return "";
+    }
 }

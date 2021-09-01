@@ -671,4 +671,68 @@ public class Simple {
         return left;
     }
 
+    /**
+     * 多数元素
+     * @param nums
+     * @return
+     */
+    public int majorityElement(int[] nums) {
+        int candidate = nums[0], count = 0;
+        for (int i = 1; i < nums.length; ++i) {
+            count += nums[i] == candidate ? 1 : -1;
+            if (count == 0) {
+                candidate = nums[i];
+            }
+        }
+        return candidate;
+    }
+
+    /**
+     * 解压输入的字符串,连续出现2次以上压缩，否则报!error
+     * 如2d -> !error
+     * 3d -> ddd
+     */
+    public void compression() {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        char[] chars = s.toCharArray();
+        int length = chars.length;
+        if (chars.length == 0) {
+            System.out.println("");
+            return;
+        }
+        if ((chars[length - 1] <= 57 && chars[length - 1] >= 48)) {
+            System.out.println("!error");
+            return;
+        }
+        StringBuilder b = new StringBuilder();
+        for (int i = 1; i <= chars.length; ++i) {
+            char t = chars[i - 1];
+            // 2以下数字不需压缩
+            if (t == 48 || (t <= 50 && t >= 48 && (chars[i] > 57 || chars[i] < 48) )) {
+                System.out.println("!error");
+                return;
+            }
+            if (t > 57 || t < 48) {
+                b.append(t);
+            } else {
+                List<Integer> list = new ArrayList();
+                while (chars[i - 1] <= 57 && chars[i - 1] >= 48) {
+                    list.add(chars[i++ - 1] - 48);
+                }
+                int n = 0;
+                for (int k = 0; k < list.size(); ++k) {
+                    int temp = 1;
+                    for (int m = 0; m < list.size() - k - 1; ++m) {
+                        temp = temp * 10;
+                    }
+                    n += temp * list.get(k);
+                }
+                for (int j = 0; j < n; ++j) {
+                    b.append(chars[i - 1]);
+                }
+            }
+        }
+        System.out.println(b.toString());
+    }
 }
