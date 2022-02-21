@@ -8,7 +8,7 @@ public class Middle {
 
     //二叉树的右视图.199
     /*给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值*/
-    public List<Integer> rightSideView(TreeNode root){
+    public List<Integer> rightSideView(TreeNode root) {
 
         //BFS,层次遍历，使用队列。每一层的最后一个元素能被看见
         List<Integer> res = new ArrayList<>();
@@ -90,15 +90,15 @@ public class Middle {
 
     //实现pow(x,n),即x的n次方
     public double myPow(double x, int n) {
-        if(n == 0)
+        if (n == 0)
             return 1;
-        if(n == 1)
+        if (n == 1)
             return x;
-        if(n == -1)
+        if (n == -1)
             return 1.0 / x;
 
-        double half = myPow(x,n / 2);
-        double mod = myPow(x,n % 2);
+        double half = myPow(x, n / 2);
+        double mod = myPow(x, n % 2);
         return half * half * mod;
 
     }
@@ -125,20 +125,20 @@ public class Middle {
                 b ^= n;
             }
         }
-        return new int[]{a,b};
+        return new int[]{a, b};
     }
 
     /*每日温度.739
-    * 根据每日 气温 列表，请重新生成一个列表，对应位置的输出是需要再等待多久温度才会升高超过该日的天数。如果之后都不会升高，请在该位置用 0 来代替
-    * 例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]
-    * */
+     * 根据每日 气温 列表，请重新生成一个列表，对应位置的输出是需要再等待多久温度才会升高超过该日的天数。如果之后都不会升高，请在该位置用 0 来代替
+     * 例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]
+     * */
     public int[] dailyTemperatures(int[] T) {
         return new int[]{1};
     }
 
     /*快乐数.202
-    * 编写一个算法来判断一个数 n 是不是快乐数
-    * 快乐数即将对于一个正整数，该数替换为每个位置上的平方和，如果最后能变为1则该数是快乐数*/
+     * 编写一个算法来判断一个数 n 是不是快乐数
+     * 快乐数即将对于一个正整数，该数替换为每个位置上的平方和，如果最后能变为1则该数是快乐数*/
     public boolean isHappy(int n) {
 
         /*Set<Integer> set = new HashSet<>();     //使用set来判断是否出现循环情况
@@ -159,6 +159,7 @@ public class Middle {
         return fast == 1;
 
     }
+
     public int getNext(int n) {     //计算各位平方和
         int sum = 0, d;
         while (n > 0) {
@@ -170,12 +171,12 @@ public class Middle {
     }
 
     /*无重复字符的最长子串.3
-    * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度*/
+     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度*/
     public int lengthOfLongestSubstring(String s) {
 
         //滑动窗口
         //记录字符上一次出现的位置
-        Map<Character,Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
         int res = 0, left = 0;  //left为左指针，i为右指针
         for (int i = 0; i < s.length(); i++) {
             if (map.containsKey(s.charAt(i))) {
@@ -207,14 +208,15 @@ public class Middle {
     }
 
     /*另一棵树的子树.572
-    * 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。
-    * s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树*/
+     * 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。
+     * s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树*/
     public boolean isSubtree(TreeNode s, TreeNode t) {
 
         if (s == null) return false;
         if (t == null) return true;     //空树是任何树的子树
         return isSubtree(s.left, t) || isSubtree(s.right, t) || isSame(s, t);   //t为s的左右子树或者s本身和t相同
     }
+
     public boolean isSame(TreeNode s, TreeNode t) {
 
         //根据结构判断是否相同
@@ -226,11 +228,12 @@ public class Middle {
     }
 
     /*
-    * 验证二叉搜索树.98
-    * 验证给定树是否为有效的二叉搜索树*/
+     * 验证二叉搜索树.98
+     * 验证给定树是否为有效的二叉搜索树*/
     public boolean isValidBST(TreeNode root) {
         return dfsBST(root, null, null);
     }
+
     public boolean dfsBST(TreeNode root, Integer low, Integer upper) {
         if (root == null) return true; //空树是一个二叉搜索树
         Integer val = root.val;
@@ -260,4 +263,165 @@ public class Middle {
         }
         return "";
     }
+
+    /**
+     * 给定一个升序数组，找到目标值开始和结束位置
+     *
+     * @param num
+     * @param target
+     * @return
+     */
+    public int[] searchRange(int[] num, int target) {
+        int left = 0, right = num.length;
+        int middle = 0;
+        while (left <= right) {
+            middle =left + (right - left) >> 2;
+            int i = num[middle];
+            if (i == target) {
+                break;
+            } else if(i < target) {
+                left = middle;
+            } else{
+                right = middle - 1;
+            }
+        }
+        if (left == right) {
+            return new int[]{-1, -1};
+        }
+
+        int start = middle, end = middle;
+        while (num[start] == target) {
+            start--;
+        }
+        while (num[end] == target) {
+            end--;
+        }
+        return new int[]{start, end};
+    }
+
+    /**
+     * 给你一个长度为 n 的整数数组nums和 一个目标值target。请你从 nums 中选出三个整数，使它们的和与target最接近。
+     *
+     * 返回这三个数的和。
+     *
+     * 假定每组输入只存在恰好一个解。
+     */
+    public int threeSumClosest(int[] nums, int target) {
+
+        int abs, sum = 0;
+        abs = target < 0 ? Integer.MAX_VALUE + target : Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; ++i) {
+            for (int j = i + 1; j < nums.length; ++j) {
+                for (int k = j + 1; k < nums.length; ++k) {
+                    if (Math.abs(target - (nums[i] + nums[j] + nums[k])) <= Math.abs(target - abs)) {
+                        abs = Math.abs(target - (nums[i] + nums[j] + nums[k]));
+                        sum = nums[i]+ nums[j] + nums[k];
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * 657.机器人是否能返回原点
+     * @param moves
+     * @return
+     */
+    public boolean judgeCircle(String moves) {
+
+        int[] arr = new int[]{0, 0, 0, 0};
+
+        char[] chars = moves.toCharArray();
+        for (char c : chars) {
+            switch (c) {
+                case 'U': arr[0]++; break;
+                case 'D': arr[1]++; break;
+                case 'L': arr[2]++; break;
+                case 'R': arr[3]++; break;
+            }
+        }
+        return arr[0] == arr[1] && arr[2] == arr[3];
+    }
+
+    /**
+     * 688.骑士在棋盘上的概率
+     * 动态规划，最优子结构
+     * @param n n×n的棋盘
+     * @param k k步
+     * @param row 起始行
+     * @param column 起始列
+     * @return
+     */
+    public double knightProbability(int n, int k, int row, int column) {
+        int[][] dirs = new int[][]{{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
+
+        // dp[step][i][j]表示从(i, j)出发走了step步时仍在棋盘内的概率
+        double[][][] dp = new double[k + 1][n][n];
+        for (int step = 0; step <= k; ++step) {
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    // 还要走0步时必然在棋盘内
+                    if (step == 0) {
+                        dp[step][i][j] = 1;
+                    } else {
+                        for (int[] dir : dirs) {
+                            // 移动后的位置为(ni, nj))
+                            int ni = i + dir[0], nj = j + dir[1];
+                            // 如果移动后在棋盘内,1/8为由(ni,nj)到(i,j)的概率
+                            if (ni >= 0 && ni < n && nj >= 0 && nj < n) {
+                                dp[step][i][j] += dp[step - 1][ni][nj] / 8;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return dp[k][row][column];
+    }
+
+    /**
+     * 969.煎饼排序
+     * 可以根据两次翻转将最大值翻转至末尾，找到当前数组最大值并将其翻转至首位，再将当前数组翻转，最大值则到末尾。
+     * 完成翻转后去掉末尾元素生成新数组，再对新数组进行上述操作，直至数组长度为1
+     * @param arr 原数组
+     * @return 煎饼反转的数组形式
+     */
+    public List<Integer> pancakeSort(int[] arr) {
+
+        List<Integer> res = new ArrayList<>();
+        for (int n = arr.length; n > 1; --n) {
+
+            // 找到当前数组的最大值下标(index)
+            int index = 0;
+            for (int i = 1; i < n; ++i) {
+                if (arr[i] >= arr[index]) {
+                    index = i;
+                }
+            }
+
+            // 如果最大值已是最后一个元素则不翻转
+            if (index == n - 1) continue;
+
+            // 如果最大值不是第一个元素则需要先翻转至首位
+            if (index != 0) {
+                reverse(arr, index);
+                // 翻转的是[0,..,k - 1],所以k=index + 1
+                res.add(index + 1);
+            }
+            // 翻转最大值至末尾
+            reverse(arr, n - 1);
+            res.add(n);
+        }
+        return res;
+    }
+    // 双指针翻转数组
+    private void reverse(int[] arr, int end) {
+        for (int i = 0, j = end; i < j; ++i, --j) {
+            arr[i] = arr[i] ^ arr[j];
+            arr[j] = arr[j] ^ arr[i];
+            arr[i] = arr[i] ^ arr[j];
+        }
+    }
+
 }

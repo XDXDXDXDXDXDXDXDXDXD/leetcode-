@@ -735,4 +735,63 @@ public class Simple {
         }
         System.out.println(b.toString());
     }
+
+    /**
+     * 罗马数字转整数
+     * @param s roman数字
+     * @return 转换后的整数
+     */
+    public Integer romanToInteger(String s) {
+
+
+
+        return 1;
+    }
+
+    /**
+     * 1791.找出星型图的中心节点
+     * @param edges 表示星型图二维数组
+     * @return 编号
+     */
+    public int findCenter(int[][] edges) {
+
+        int p = 0, q = 0;
+        for (int[] t : edges) {
+            if (p == t[0] || p == t[1]) {
+                return p;
+            } else if (q == t[0] || q == t[1]) {
+                return q;
+            }
+
+            p = t[0];
+            q = t[1];
+        }
+        return 1;
+    }
+
+    /**
+     * 717.1比特与2比特字符
+     *
+     * 因为只有10,11,0组合，所以只需看最后一位0前有多少个连续的1，如果是偶数个（[...0,0]也符合），则可以全部匹配为11。
+     * 否则必然最后是10
+     * @param bits 表示字符的数组
+     * @return 最后以为是否必须为1位字符
+     */
+    public boolean isOneBitCharacter(int[] bits) {
+
+        if (bits == null || bits.length < 2) {
+            return true;
+        }
+
+        int p = 0;
+        for(int i = bits.length - 2; i >= 0; --i) {
+            if (bits[i] == 1) {
+                p++;
+            } else {
+                break;
+            }
+        }
+
+        return (p & 1) == 0;
+    }
 }

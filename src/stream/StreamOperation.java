@@ -188,11 +188,11 @@ public class StreamOperation {
     public Map<Boolean, List<User>> partitioning() {
         return this.users.stream().collect(Collectors.partitioningBy(i -> i.getBalance() > 5000));
     }
-
     // 按姓氏分组
     public Map<String, List<String>> grougByFirstName(List<String> names) {
         return names.stream().collect(Collectors.groupingBy(i -> i.substring(0, 1)));
     }
+
 
     /**
      * page simulation
@@ -206,11 +206,11 @@ public class StreamOperation {
         }
         return pageSimulation.stream().skip(pageNum - 1).limit(pageSize).collect(Collectors.toList());
     }
-
     // 取给定数组中绝对值输出
     public void getAbs(List<Integer> list) {
         list.stream().map(Math::abs).forEach(System.out::print);
     }
+
 
     public List<User> getUsers() {
         return users;
