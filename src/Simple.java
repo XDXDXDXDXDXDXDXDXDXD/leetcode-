@@ -794,4 +794,49 @@ public class Simple {
 
         return (p & 1) == 0;
     }
+
+    /**
+     * 岛屿数量
+     * @param grid
+     * @return
+     */
+    public int numIslands(char[][] grid) {
+        return 0;
+    }
+
+    /**
+     * 917.仅仅翻转字母
+     * @param s
+     * @return
+     */
+    public String reverseOnlyLetters(String s) {
+
+        if (s == null || s.length() < 1) {
+            return s;
+        }
+        char[] chars = s.toCharArray();
+        int left = 0, right = chars.length - 1;
+        while (left <= right && left < chars.length && right > 0) {
+            char leftChar = chars[left];
+            char rightChar = chars[right];
+            if (!isLetter(leftChar)) {
+                left++;
+                continue;
+            }
+            if (!isLetter(rightChar)) {
+                right--;
+                continue;
+            }
+            char temp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = temp;
+            left++;
+            right--;
+        }
+        return String.valueOf(chars);
+    }
+
+    private boolean isLetter(char c) {
+        return (c >= 65 && c <= 90) || (c >= 97 && c <= 122);
+    }
 }
