@@ -3,14 +3,18 @@ import threadlearn.Example;
 import threadlearn.MyThreadImpl;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        Middle middle = new Middle();
-        System.out.println(Math.pow(8, 101));
+        String t = "ab-cd";
+        Simple simple = new Simple();
+        String s = simple.reverseOnlyLetters(t);
+        System.out.println(s);
     }
 
     /**

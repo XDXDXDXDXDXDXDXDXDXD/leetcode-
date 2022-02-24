@@ -424,4 +424,73 @@ public class Middle {
         }
     }
 
+    /**
+     * 838. 推多米诺
+     *
+     *  "RR.L" -> "RR.L
+     *  ".L.R...LR..L.." -> "LL.RR.LLRRLL.."
+     * @param dominoes
+     * @return
+     */
+    public String pushDominoes(String dominoes) {
+        int n = dominoes.length();
+        Deque<Integer> queue = new ArrayDeque<Integer>();
+        int[] time = new int[n];
+        Arrays.fill(time, -1);
+        List<Character>[] force = new List[n];
+        for (int i = 0; i < n; i++) {
+            force[i] = new ArrayList<Character>();
+        }
+        for (int i = 0; i < n; i++) {
+            char f = dominoes.charAt(i);
+            if (f != '.') {
+                queue.offer(i);
+                time[i] = 0;
+                force[i].add(f);
+            }
+        }
+
+        char[] res = new char[n];
+        Arrays.fill(res, '.');
+        while (!queue.isEmpty()) {
+            int i = queue.poll();
+            if (force[i].size() == 1) {
+                char f = force[i].get(0);
+                res[i] = f;
+                int ni = f == 'L' ? i - 1 : i + 1;
+                if (ni >= 0 && ni < n) {
+                    int t = time[i];
+                    if (time[ni] == -1) {
+                        queue.offer(ni);
+                        time[ni] = t + 1;
+                        force[ni].add(f);
+                    } else if (time[ni] == t + 1) {
+                        force[ni].add(f);
+                    }
+                }
+            }
+        }
+        return new String(res);
+    }
+
+    /**
+     * 1706. 球会落何处
+     * 用一个大小为 m x n 的二维网格 grid 表示一个箱子。你有 n 颗球。箱子的顶部和底部都是开着的。
+     *
+     * 箱子中的每个单元格都有一个对角线挡板，跨过单元格的两个角，可以将球导向左侧或者右侧。
+     *
+     * 将球导向右侧的挡板跨过左上角和右下角，在网格中用 1 表示。
+     * 将球导向左侧的挡板跨过右上角和左下角，在网格中用 -1 表示。
+     * 在箱子每一列的顶端各放一颗球。每颗球都可能卡在箱子里或从底部掉出来。如果球恰好卡在两块挡板之间的 "V" 形图案，或者被一块挡导向到箱子的任意一侧边上，就会卡住。
+     *
+     * 返回一个大小为 n 的数组 answer ，其中 answer[i] 是球放在顶部的第 i 列后从底部掉出来的那一列对应的下标，如果球卡在盒子里，则返回 -1 。
+     * @param grid
+     * @return
+     */
+    public static int[] findBall(int[][] grid) {
+
+
+        return new int[]{};
+    }
+
 }
