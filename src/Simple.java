@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -816,11 +817,11 @@ public class Simple implements Question {
         while (left <= right && left < chars.length && right > 0) {
             char leftChar = chars[left];
             char rightChar = chars[right];
-            if (!isLetter(leftChar)) {
+            if (isLetter(leftChar)) {
                 left++;
                 continue;
             }
-            if (!isLetter(rightChar)) {
+            if (isLetter(rightChar)) {
                 right--;
                 continue;
             }
@@ -833,7 +834,7 @@ public class Simple implements Question {
         return String.valueOf(chars);
     }
     private boolean isLetter(char c) {
-        return (c >= 65 && c <= 90) || (c >= 97 && c <= 122);
+        return (c < 65 || c > 90) && (c < 97 || c > 122);
     }
 
     /**
@@ -851,5 +852,23 @@ public class Simple implements Question {
             }
         }
         return max;
+    }
+
+    /**
+     * 977.有序数组的平方
+     */
+    public int[] sortedSquares(int[] nums) {
+
+        int[] res = new int[nums.length];
+        int left = 0, right = nums.length - 1;
+        int p = res.length - 1;
+        while (left <= right) {
+            if (nums[left] * nums[left] > nums[right] * nums[right]) {
+                res[p--] = nums[left] * nums[left++];
+            } else {
+                res[p--] = nums[right] * nums[right--];
+            }
+        }
+        return res;
     }
 }
