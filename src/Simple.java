@@ -1,7 +1,4 @@
-
 import java.util.*;
-
-import static java.lang.Math.abs;
 
 /**
  * @author YHZ
@@ -835,8 +832,24 @@ public class Simple implements Question {
         }
         return String.valueOf(chars);
     }
-
     private boolean isLetter(char c) {
         return (c >= 65 && c <= 90) || (c >= 97 && c <= 122);
+    }
+
+    /**
+     * 2016. 增量元素之间的最大差值
+     */
+    public int maximumDifference(int[] nums) {
+
+        int max = -1, preMin = nums[0];
+        for (int i = 1; i < nums.length; ++i) {
+            if (nums[i] > preMin) {
+                max = Math.max(max, nums[i] - preMin);
+            } else {
+                // 维护前缀最小值
+                preMin = nums[i];
+            }
+        }
+        return max;
     }
 }
