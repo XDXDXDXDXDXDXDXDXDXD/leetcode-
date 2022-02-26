@@ -4,7 +4,7 @@ import java.util.*;
  * @author YHZ
  * @date 2020/4/29
  */
-public class Hard {
+public class Hard implements Question {
 
     /*山脉数组中查找目标值.1095
     * 寻找在此数组中目标值出现的最小索引，没有出现返回-1

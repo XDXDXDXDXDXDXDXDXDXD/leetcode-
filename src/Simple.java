@@ -7,7 +7,7 @@ import static java.lang.Math.abs;
  * @author YHZ
  * @date 2020/4/19
  */
-public class Simple {
+public class Simple implements Question {
 
     //给你一个整数数组 nums，请你返回其中位数为 偶数 的数字的个数
     public int findNumbers(int[] nums) {

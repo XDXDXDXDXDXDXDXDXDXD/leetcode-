@@ -4,7 +4,7 @@ import java.util.*;
  * @author YHZ
  * @date 2020/4/22
  */
-public class Middle {
+public class Middle implements Question {
 
     //二叉树的右视图.199
     /*给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值*/
@@ -502,4 +502,45 @@ public class Middle {
         return res;
     }
 
+    /**
+     * 537.复数乘法
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public String complexNumberMultiply(String num1, String num2) {
+
+        String[] t1 = num1.split("\\+");
+        String[] t2 = num2.split("\\+");
+        int n1 = Integer.parseInt(t1[0]);
+        int n2 = Integer.parseInt(t2[0]);
+        int nI1 = toNum(t1[1]);
+        int nI2 = toNum(t2[1]);
+
+        return (n1 * n2 + (nI1 * nI2) * -1) + "+" + ((n1 * nI2) + (nI1 * n2)) + "i";
+    }
+    private int toNum(String t) {
+        return Integer.valueOf(t.split("i")[0], 10);
+    }
+
+    public int searchInsert(int[] nums, int target) {
+
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        if (nums.length == 1) {
+            return nums[0] > target ? 0 : 1;
+        }
+
+        int left = 0; int right = nums.length - 1;
+        while (left < right) {
+            int middle = left + (right - left) / 2;
+            if (nums[middle] >= target) {
+                right = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return left;
+    }
 }
