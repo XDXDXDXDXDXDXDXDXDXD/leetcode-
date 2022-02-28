@@ -275,13 +275,13 @@ public class Middle implements Question {
         int left = 0, right = num.length;
         int middle = 0;
         while (left <= right) {
-            middle =left + (right - left) >> 2;
+            middle = left + (right - left) >> 2;
             int i = num[middle];
             if (i == target) {
                 break;
-            } else if(i < target) {
+            } else if (i < target) {
                 left = middle;
-            } else{
+            } else {
                 right = middle - 1;
             }
         }
@@ -301,9 +301,9 @@ public class Middle implements Question {
 
     /**
      * 给你一个长度为 n 的整数数组nums和 一个目标值target。请你从 nums 中选出三个整数，使它们的和与target最接近。
-     *
+     * <p>
      * 返回这三个数的和。
-     *
+     * <p>
      * 假定每组输入只存在恰好一个解。
      */
     public int threeSumClosest(int[] nums, int target) {
@@ -315,7 +315,7 @@ public class Middle implements Question {
                 for (int k = j + 1; k < nums.length; ++k) {
                     if (Math.abs(target - (nums[i] + nums[j] + nums[k])) <= Math.abs(target - abs)) {
                         abs = Math.abs(target - (nums[i] + nums[j] + nums[k]));
-                        sum = nums[i]+ nums[j] + nums[k];
+                        sum = nums[i] + nums[j] + nums[k];
                     }
                 }
             }
@@ -325,6 +325,7 @@ public class Middle implements Question {
 
     /**
      * 657.机器人是否能返回原点
+     *
      * @param moves
      * @return
      */
@@ -335,10 +336,18 @@ public class Middle implements Question {
         char[] chars = moves.toCharArray();
         for (char c : chars) {
             switch (c) {
-                case 'U': arr[0]++; break;
-                case 'D': arr[1]++; break;
-                case 'L': arr[2]++; break;
-                case 'R': arr[3]++; break;
+                case 'U':
+                    arr[0]++;
+                    break;
+                case 'D':
+                    arr[1]++;
+                    break;
+                case 'L':
+                    arr[2]++;
+                    break;
+                case 'R':
+                    arr[3]++;
+                    break;
             }
         }
         return arr[0] == arr[1] && arr[2] == arr[3];
@@ -347,9 +356,10 @@ public class Middle implements Question {
     /**
      * 688.骑士在棋盘上的概率
      * 动态规划，最优子结构
-     * @param n n×n的棋盘
-     * @param k k步
-     * @param row 起始行
+     *
+     * @param n      n×n的棋盘
+     * @param k      k步
+     * @param row    起始行
      * @param column 起始列
      * @return
      */
@@ -384,6 +394,7 @@ public class Middle implements Question {
      * 969.煎饼排序
      * 可以根据两次翻转将最大值翻转至末尾，找到当前数组最大值并将其翻转至首位，再将当前数组翻转，最大值则到末尾。
      * 完成翻转后去掉末尾元素生成新数组，再对新数组进行上述操作，直至数组长度为1
+     *
      * @param arr 原数组
      * @return 煎饼反转的数组形式
      */
@@ -415,6 +426,7 @@ public class Middle implements Question {
         }
         return res;
     }
+
     // 双指针翻转数组
     private void reverse(int[] arr, int end) {
         for (int i = 0, j = end; i < j; ++i, --j) {
@@ -426,9 +438,10 @@ public class Middle implements Question {
 
     /**
      * 838. 推多米诺
+     * <p>
+     * "RR.L" -> "RR.L
+     * ".L.R...LR..L.." -> "LL.RR.LLRRLL.."
      *
-     *  "RR.L" -> "RR.L
-     *  ".L.R...LR..L.." -> "LL.RR.LLRRLL.."
      * @param dominoes
      * @return
      */
@@ -504,6 +517,7 @@ public class Middle implements Question {
 
     /**
      * 537.复数乘法
+     *
      * @param num1
      * @param num2
      * @return
@@ -519,6 +533,7 @@ public class Middle implements Question {
 
         return (n1 * n2 + (nI1 * nI2) * -1) + "+" + ((n1 * nI2) + (nI1 * n2)) + "i";
     }
+
     private int toNum(String t) {
         return Integer.valueOf(t.split("i")[0], 10);
     }
@@ -532,7 +547,8 @@ public class Middle implements Question {
             return nums[0] > target ? 0 : 1;
         }
 
-        int left = 0; int right = nums.length - 1;
+        int left = 0;
+        int right = nums.length - 1;
         while (left < right) {
             int middle = left + (right - left) / 2;
             if (nums[middle] >= target) {
@@ -542,5 +558,51 @@ public class Middle implements Question {
             }
         }
         return left;
+    }
+
+    /**
+     * 189. 轮转数组
+     */
+    public void rotate(int[] nums, int k) {
+
+        if (nums.length == 0 || nums.length == 1) return;
+        int realMove = k % nums.length;
+        if (realMove == 0) return;
+        int i = 0, temp1 = 0, temp2, count = 0, length = nums.length;
+        for (int j = 0; j < length; j++) {
+            i = j;
+            temp1 = nums[i];
+            if (count == length) break;
+            do {
+                temp2 = nums[(i + realMove) % length];
+                nums[(i + realMove) % length] = temp1;
+                temp1 = temp2;
+                i = (i + realMove) % length;
+                count++;
+            } while (j != i && count < length);
+        }
+    }
+
+    /**
+     * 167.两数之和Ⅱ
+     * @param numbers
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] numbers, int target) {
+        int[] res = new int[2];
+        int left = 0, right = numbers.length - 1;
+        while (left < right) {
+            if (numbers[left] + numbers[right] > target) {
+                right--;
+            } else if (numbers[left] + numbers[right] < target) {
+                left++;
+            } else {
+                break;
+            }
+        }
+        res[0] = left + 1;
+        res[1] = right + 1;
+        return res;
     }
 }

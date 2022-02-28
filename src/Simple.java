@@ -871,4 +871,21 @@ public class Simple implements Question {
         }
         return res;
     }
+
+    /**
+     * 283.移动0
+     * @param nums
+     */
+    public void moveZeroes(int[] nums) {
+
+        int left = 0, right = 0;
+        while (right < nums.length) {
+            if (nums[right] != 0) {
+                int t = nums[right];
+                nums[right] = nums[left];
+                nums[left++] = t;
+            }
+            right++;
+        }
+    }
 }
