@@ -142,6 +142,7 @@ public class Simple implements Question {
         int val;
         ListNode next;
         ListNode(int x) { val = x; }
+        ListNode(int x, ListNode next) { val = x; this.next = next; }
     }
 
     /*删除中间节点。.面02.03
@@ -887,5 +888,90 @@ public class Simple implements Question {
             }
             right++;
         }
+    }
+
+    /**
+     * 反转字符串
+     * @param s
+     */
+    public void reverseString(char[] s) {
+        int left = 0, right = s.length - 1;
+        while(left < right) {
+            char t = s[left];
+            s[left] = s[right];
+            s[right] = t;
+            left++;
+            right--;
+        }
+    }
+
+    /**
+     * 反转字符串中的单词
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+
+        StringBuilder builder = new StringBuilder();
+        String[] s1 = s.split(" ");
+        for (String t : s1) {
+            char[] chars = t.toCharArray();
+            int left = 0, right = chars.length - 1;
+            while (left < right) {
+                char c = chars[left];
+                chars[left] = chars[right];
+                chars[right] = c;
+                left++;
+                right--;
+            }
+            builder.append(chars).append(" ");
+        }
+        return builder.substring(0, builder.length() - 1);
+    }
+
+    /**
+     * 876.链表的中间节点
+     * @param head
+     * @return
+     */
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    /**
+     * 258.各位相加
+     * @param num
+     * @return
+     */
+    public int addDigits(int num) {
+
+        while (num >= 10) {
+            int sum = 0;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            num = sum;
+        }
+
+        return num;
+    }
+
+    /**
+     * 504.七进制数
+     * @param num
+     * @return
+     */
+    public String convertToBase7(int num) {
+
+
+        return "";
     }
 }

@@ -11,7 +11,7 @@ public class Generic<T> {
 
     public Generic(T name) {
         assert name != null : "姓名不可为空";
-       this.name = name;
+        this.name = name;
     }
 
     public T getName() {

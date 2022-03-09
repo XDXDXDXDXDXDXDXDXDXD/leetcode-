@@ -605,4 +605,87 @@ public class Middle implements Question {
         res[1] = right + 1;
         return res;
     }
+
+    public Simple.ListNode removeNthFromEnd(Simple.ListNode head, int n) {
+
+        Simple.ListNode dummy = new Simple.ListNode(0, head);
+        Simple.ListNode first = head;
+        Simple.ListNode second = dummy;
+
+        // 快指针先走n步
+        for (int i = 0; i < n; ++i) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+
+        // 删除倒数第n个节点
+        second.next = second.next.next;
+        return dummy.next;
+    }
+
+    /**
+     * 3.无重复字符的最长字串
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring_again(String s) {
+
+        int left = 0, right = 0;
+        int res = 0;
+        while (left < s.length()) {
+
+        }
+        return 1;
+    }
+
+    /**
+     * 2055.蜡烛之间的盘子：预处理+前缀和
+     * 先获取每个位置前缀有多少盘子,获取到蜡烛位置x,y后即可得到答案preSum_y-preSumx(因为x是蜡烛所以不必写成preSum_y-preSum_x-1)
+     * 如何获取蜡烛位置:先获取每个位置的左侧和右侧第一个蜡烛位置,则区间的蜡烛位置左端点在所在位置的右侧的第一个蜡烛位置,右端点在所在位置的左侧的一个蜡烛位置
+     * @param s
+     * @param queries
+     * @return
+     */
+    public int[] platesBetweenCandles(String s, int[][] queries) {
+
+        int length = s.length();
+        // 前缀和
+        int[] preSum = new int[length];
+        // 记录左侧第一个蜡烛位置
+        int[] leftFirst = new int[length];
+        // 记录右侧第一个蜡烛位置
+        int[] rightFirst = new int[length];
+
+        for (int i = 0, sum = 0; i < length; ++i) {
+            if (s.charAt(i) == '*') {
+                sum++;
+            }
+            preSum[i] = sum;
+        }
+
+        for (int i = 0, left = -1; i < length; ++i) {
+            if (s.charAt(i) == '|') {
+                left = i;
+            }
+            leftFirst[i] = left;
+        }
+        for (int i = length - 1, right = -1; i > -1; --i) {
+            if (s.charAt(i) == '|') {
+                right = i;
+            }
+            rightFirst[i] = right;
+        }
+
+        int[] res = new int[queries.length];
+        for (int i = 0; i < queries.length; ++i) {
+            int[] t = queries[i];
+            int left = rightFirst[t[0]], right = leftFirst[t[1]];
+            res[i] = left == -1 || right == -1 || left >= right ? 0 : preSum[right] - preSum[left];
+        }
+
+        return res;
+    }
 }
