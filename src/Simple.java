@@ -965,13 +965,69 @@ public class Simple implements Question {
     }
 
     /**
-     * 504.七进制数
-     * @param num
+     * 231.2的幂.见常用知识点一.2.2位运算
+     * @param n
      * @return
      */
-    public String convertToBase7(int num) {
+    public boolean isPowerOfTwo(int n) {
 
+        return n > 0 && (n & (n - 1)) == 0;
+    }
 
-        return "";
+    /**
+     * 191.位1的个数
+     * @param n
+     * @return
+     */
+    public int hammingWeight(int n) {
+
+        int res = 0;
+        for (int i = 0; i < 32; ++i) {
+            if ((n & (1 << i)) != 0) {
+                res++;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 733.图像渲染
+     * @param image 染色后的图案
+     * @param sr 起始x
+     * @param sc 起始y
+     * @param newColor 新颜色
+     * @return
+     */
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+
+        // x[i]y[i]用以模拟上下左右4个方向
+        int[] x = new int[]{0, 0, 1, -1};
+        int[] y = new int[]{1, -1, 0, 0};
+
+        // 记录起始位置的颜色
+        int startColor = image[sr][sc];
+        if (startColor == newColor) {
+            return image;
+        }
+
+        // 起始节点入队,并改变颜色
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{sr, sc});
+        image[sr][sc] = newColor;
+        while (!queue.isEmpty()) {
+            // 出队
+            int[] cur = queue.poll();
+            // 遍历此节点的上下左右4个方向的单元格是否符合条件,符合的话入队并改变颜色
+            int curX = cur[0], curY = cur[1];
+            for (int i = 0; i < 4; ++i) {
+                int ax = curX + x[i], ay = curY + y[i];
+                if (ax >= 0 && ay >= 0 && ax < image.length && ay < image[0].length && image[ax][ay] == startColor) {
+                    image[ax][ay] = newColor;
+                    queue.offer(new int[]{ax, ay});
+                }
+            }
+        }
+
+        return image;
     }
 }

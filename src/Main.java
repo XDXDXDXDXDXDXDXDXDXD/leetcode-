@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        Middle middle = (Middle) QuestionFactory.getQuestion(Middle.class);
-        System.out.println(middle.searchInsert(new int[]{1,3,5,6}, 7));
+        int i = 128;
+        System.out.println(i ^ 0);
     }
 
     /**
