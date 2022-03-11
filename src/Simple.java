@@ -1,3 +1,5 @@
+import Base.Node;
+
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -1029,5 +1031,28 @@ public class Simple implements Question {
         }
 
         return image;
+    }
+
+    /**
+     * 589.N叉树的前序遍历
+     * @param root
+     * @return
+     */
+    public List<Integer> preorder(Node root) {
+
+        List<Integer> res = new ArrayList<>();
+        preorderRc(root, res);
+        return res;
+    }
+    private void preorderRc (Node node, List<Integer> res) {
+
+        if (node == null) {
+            return;
+        }
+
+        res.add(node.val);
+        for (Node child : node.children) {
+            preorderRc(child, res);
+        }
     }
 }
