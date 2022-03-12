@@ -1,3 +1,5 @@
+import Base.Node;
+
 import java.util.*;
 
 /**
@@ -687,5 +689,35 @@ public class Middle implements Question {
         }
 
         return res;
+    }
+
+    /**
+     * 2049.统计最高分的节点数目
+     * @param parents
+     * @return
+     */
+    public int countHighestScoreNodes(int[] parents) {
+        return 0;
+    }
+
+    /**
+     * 590.N叉树的后序遍历
+     * @param root
+     * @return
+     */
+    public List<Integer> postorder(Node root) {
+
+        List<Integer> res = new ArrayList<>();
+        postorderDsf(res, root);
+        return res;
+    }
+    private void postorderDsf(List<Integer> res, Node root) {
+
+        if (root == null) return;
+
+        for (Node child : root.children) {
+            postorderDsf(res, child);
+        }
+        res.add(root.val);
     }
 }
