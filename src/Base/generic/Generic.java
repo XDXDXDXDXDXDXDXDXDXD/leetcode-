@@ -1,6 +1,7 @@
-package Base.Generic;
+package Base.generic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,5 +23,15 @@ public class Generic<T> {
     public T getChoice() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         return choiceArray.get(random.nextInt(choiceArray.size()));
+    }
+
+    private static void varargs(Integer... integers) {
+
+        List<Integer> integers1 = Arrays.asList(integers);
+        integers1.forEach(System.out::println);
+    }
+
+    public static void main(String[] args) {
+        varargs(1,2,3,4,5,6);
     }
 }

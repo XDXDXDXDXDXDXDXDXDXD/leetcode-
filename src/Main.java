@@ -1,18 +1,15 @@
 import stream.User;
-import threadlearn.Example;
-import threadlearn.MyThreadImpl;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        int i = 128;
-        System.out.println(i ^ 0);
+        String[] restaurant = Simple.findRestaurant(new String[]{"Shogun", "Tapioca Express", "Burger King", "KFC"}, new String[]{"KFC", "The Grill at Torrey Pines", "Tapioca Express", "Shogun"});
+        for (String s : restaurant) {
+            System.out.print(s + "\t");
+        }
     }
 
     /**
