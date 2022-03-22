@@ -1095,4 +1095,102 @@ public class Simple implements Question {
 
         return res.toArray(new String[0]);
     }
+
+    /**
+     * 720.词典中最长的单词
+     * @param words
+     * @return
+     */
+    public String longestWord(String[] words) {
+
+        String res = "";
+        // 按单词长度升序、字典顺序降序
+        Arrays.sort(words, (a, b) -> {
+            if (a.length() == b.length()) {
+                return b.compareTo(a);
+            } else {
+                return a.length() - b.length();
+            }
+        });
+
+        Set<String> set = new HashSet<>();
+        set.add("");
+        for (String word : words) {
+            if (set.contains(word.substring(0, word.length() - 1))) {
+                set.add(word);
+                res = word;
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * 606.根据二叉树创建字符串
+     * @param root
+     * @return
+     */
+    public String tree2str(TreeNode root) {
+
+        StringBuilder builder = new StringBuilder();
+        tree2strDfs(root, builder);
+
+        return builder.toString();
+    }
+    private void tree2strDfs(TreeNode root, StringBuilder builder) {
+
+        if (root == null)
+            return;
+
+        // 根节点直接加入
+        builder.append(root.val);
+        // 左右节点都为空不处理
+        if (root.left == null && root.right == null)
+            return;
+
+        // 处理左节点
+        builder.append("(");
+        tree2strDfs(root.left, builder);
+        builder.append(")");
+
+        // 右节点不为空才加入
+        if (root.right != null) {
+            builder.append("(");
+            tree2strDfs(root.right, builder);
+            builder.append(")");
+        }
+    }
+
+    /**
+     * 653. 两数之和 IV - 输入 BST
+     * @param root
+     * @param k
+     * @return
+     */
+    public boolean findTarget(TreeNode root, int k) {
+        List<Integer> list = new ArrayList<>();
+        inorder(root, list);
+
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            Integer left = list.get(i);
+            Integer right = list.get(j);
+            if (left + right == k) return true;
+            if ((left + right) > k)  {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        return false;
+    }
+    private void inorder(TreeNode root, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+    }
+
 }
