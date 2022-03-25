@@ -1193,4 +1193,36 @@ public class Simple implements Question {
         inorder(root.right, list);
     }
 
+    /**
+     * 661. 图片平滑器
+     * @param img
+     * @return
+     */
+    public int[][] imageSmoother(int[][] img) {
+
+        int xLength = img.length;
+        int yLength = img[0].length;
+
+        int[][] res = new int[xLength][yLength];
+
+        int[] x = new int[]{0, 0, 0, 1, 1, 1, -1, -1, -1};
+        int[] y = new int[]{0, 1, -1, 0, 1, -1, 0, 1, -1};
+
+        for (int i = 0; i < xLength; ++i) {
+            for (int j = 0; j < yLength; ++j) {
+                int sum = 0, count = 0;
+                for (int t = 0; t < 9; ++t) {
+                    int tx = i + x[t], ty = j + y[t];
+                    if (tx >= 0 && ty >= 0 && tx < xLength && ty < yLength) {
+                        sum += img[tx][ty];
+                        count++;
+                    }
+                }
+                res[i][j] = sum / count;
+            }
+        }
+
+        return res;
+    }
+
 }

@@ -1,3 +1,4 @@
+import Base.MyFactory;
 import stream.User;
 
 import java.util.*;
@@ -6,9 +7,14 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        String[] restaurant = Simple.findRestaurant(new String[]{"Shogun", "Tapioca Express", "Burger King", "KFC"}, new String[]{"KFC", "The Grill at Torrey Pines", "Tapioca Express", "Shogun"});
-        for (String s : restaurant) {
-            System.out.print(s + "\t");
+        int[][] i = new int[][]{{100,200,100},{200,50,200},{100,200,100}};
+        Simple question = (Simple) QuestionFactory.getQuestion(Simple.class);
+        int[][] ints = question.imageSmoother(i);
+        for (int i1 = 0; i1 < ints.length; i1++) {
+            for (int j = 0 ; j < ints[0].length; ++j) {
+                System.out.print(ints[i1][j] + " ");
+            }
+            System.out.println();
         }
     }
 
