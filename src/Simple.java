@@ -1225,4 +1225,97 @@ public class Simple implements Question {
         return res;
     }
 
+    /**
+     * 682. 棒球比赛
+     * @param ops  ["5","2","C","D","+"]
+     * @return
+     */
+    public int calPoints(String[] ops) {
+
+        Queue<Integer> queue = new LinkedList<>();
+        List<Integer> list = new ArrayList<>();
+        int sum = 0, t = 0;
+        for (int i = 0; i < ops.length; ++i) {
+            String op = ops[i];
+            if ("+".equals(op)) {
+                t = Integer.parseInt(ops[i - 1]) + Integer.parseInt(ops[i - 2]);
+                sum += t;
+                continue;
+            }
+            if ("D".equals(op)) {
+                t = Integer.parseInt(ops[i - 1]) * 2;
+                sum += t;
+                continue;
+            }
+            if ("C".equals(op)) {
+                sum -= t;
+                continue;
+            }
+            t = Integer.parseInt(ops[i]);
+            sum += t;
+        }
+
+        return sum;
+    }
+
+    /**
+     * 693. 交替位二进制数
+     * 给定一个正整数，检查它的二进制表示是否总是 0、1 交替出现：换句话说，就是二进制表示中相邻两位的数字永不相同。
+     * @param n
+     * @return
+     */
+    public static boolean hasAlternatingBits(int n) {
+
+        boolean flag = false, tFlag;
+        int length = getCount(n);
+        int i = 0;
+        do {
+            tFlag = (n & (1 << i++)) == 1;
+            if (i == 0) {
+                flag = tFlag;
+            }
+            if (flag == tFlag) {
+                return false;
+            }
+            flag = tFlag;
+        } while (i <= length && i < 32);
+
+        return true;
+    }
+    public static int getCount(int n) {
+        return (int) Math.sqrt(Integer.highestOneBit(n));
+    }
+
+    /**
+     * 728. 自除数
+     * @param left
+     * @param right
+     * @return
+     */
+    public static List<Integer> selfDividingNumbers(int left, int right) {
+
+        List<Integer> res = new ArrayList<>();
+        for (int i = left; i <= right; ++i) {
+            if ((isSelf(i))) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
+    public static boolean isSelf(int num) {
+        if (num < 10) {
+            return true;
+        }
+        int ori = num;
+        while (num > 0) {
+            int mod = num % 10;
+            if (mod == 0) return false;
+            if (ori % mod == 0) {
+                num = num / 10;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -7,19 +7,19 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        int[][] i = new int[][]{{100,200,100},{200,50,200},{100,200,100}};
-        Simple question = (Simple) QuestionFactory.getQuestion(Simple.class);
-        int[][] ints = question.imageSmoother(i);
-        for (int i1 = 0; i1 < ints.length; i1++) {
-            for (int j = 0 ; j < ints[0].length; ++j) {
-                System.out.print(ints[i1][j] + " ");
-            }
-            System.out.println();
-        }
+        Simple.selfDividingNumbers(47, 85).forEach(System.out::println);
+//        for (int j = 30, i = (1 << j); j >= 0; --j) {
+//            if ((i | 5) == 5) {
+//                System.out.println(j + 2);
+//                break;
+//            }
+//            i = (1 << j);
+//        }
     }
 
     /**
      * 根据实体类的某个属性去重
+     *
      * @param temp 需去重的list
      * @return 已去重list
      */
@@ -45,8 +45,8 @@ public class Main {
 
         Map<Object, Map> aae140MaxIssNum = ab07s.stream().filter(i -> "10".equals(i.get("aaa115"))).collect(Collectors.groupingBy(
                 i -> i.get("aae140"), Collectors.collectingAndThen(
-                        Collectors.reducing((c1, c2) ->  (
-                                (c1.get("aae003") != null && c2.get("aae003") != null)) && Integer.parseInt(c1.get("aae003").toString()) >  Integer.parseInt(c2.get("aae003").toString()) ? c1 : c2
+                        Collectors.reducing((c1, c2) -> (
+                                (c1.get("aae003") != null && c2.get("aae003") != null)) && Integer.parseInt(c1.get("aae003").toString()) > Integer.parseInt(c2.get("aae003").toString()) ? c1 : c2
                         ), Optional::get
                 )));
         for (Object i : aae140MaxIssNum.keySet()) {
@@ -55,7 +55,7 @@ public class Main {
         }
     }
 
-    public void s () {
+    public void s() {
         System.out.println("哈哈哈哈");
     }
 }

@@ -1,5 +1,6 @@
 import Base.Node;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -769,4 +770,42 @@ public class Middle implements Question {
         return freq[0] > freq[1];
     }
 
+    /**
+     * n!尾随的0的个数
+     * @param n
+     * @return
+     */
+    /* 离谱 */
+    public static int trailingZeroes(int n) {
+
+        int ans = 0;
+        while (n != 0) {
+            n /= 5;
+            ans += n;
+        }
+        return ans;
+    }
+
+    /**
+     * 2024. 考试的最大困扰度
+     * @param answerKey
+     * @param k
+     * @return
+     */
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+        return Math.max(maxConsecutiveChar(answerKey, k, 'T'), maxConsecutiveChar(answerKey, k, 'F'));
+    }
+
+    public int maxConsecutiveChar(String answerKey, int k, char ch) {
+        int n = answerKey.length();
+        int ans = 0;
+        for (int left = 0, right = 0, sum = 0; right < n; right++) {
+            sum += answerKey.charAt(right) != ch ? 1 : 0;
+            while (sum > k) {
+                sum -= answerKey.charAt(left++) != ch ? 1 : 0;
+            }
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
 }
