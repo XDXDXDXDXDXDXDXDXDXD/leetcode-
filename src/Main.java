@@ -1,20 +1,22 @@
-import Base.MyFactory;
+import Base.MyEnum;
 import stream.User;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        Simple.selfDividingNumbers(47, 85).forEach(System.out::println);
-//        for (int j = 30, i = (1 << j); j >= 0; --j) {
-//            if ((i | 5) == 5) {
-//                System.out.println(j + 2);
-//                break;
-//            }
-//            i = (1 << j);
-//        }
+        String a = """
+                weroewrjwr
+                    2342343
+                """;
+        System.out.println(a);
+
+        switch (a) {
+        }
+
     }
 
     /**
@@ -34,28 +36,17 @@ public class Main {
      * 分组后取最大
      */
     public void groupMax() {
-        List<Map> ab07s = new ArrayList();
-        Map map = new HashMap();
+        List<Map<String, String>> ab07s = new ArrayList<>();
+        Map<String, String> map = new HashMap<>();
         map.put("110", "202108");
         map.put("210", "202108");
-        map.put("110", "202109");
-        map.put("210", "202109");
-        map.put("110", "202110");
-        map.put("210", "202110");
+        ab07s.add(map);
 
-        Map<Object, Map> aae140MaxIssNum = ab07s.stream().filter(i -> "10".equals(i.get("aaa115"))).collect(Collectors.groupingBy(
-                i -> i.get("aae140"), Collectors.collectingAndThen(
-                        Collectors.reducing((c1, c2) -> (
-                                (c1.get("aae003") != null && c2.get("aae003") != null)) && Integer.parseInt(c1.get("aae003").toString()) > Integer.parseInt(c2.get("aae003").toString()) ? c1 : c2
-                        ), Optional::get
-                )));
+        Map<Object, Map<String, String>> aae140MaxIssNum = ab07s.stream().filter(i -> "10".equals(i.get("aaa115"))).collect(Collectors.toMap(i -> i.get("aae140"), Function.identity(), (c1, c2) -> (
+                (c1.get("aae003") != null && c2.get("aae003") != null)) && Integer.parseInt(c1.get("aae003")) > Integer.parseInt(c2.get("aae003")) ? c1 : c2));
         for (Object i : aae140MaxIssNum.keySet()) {
             String s = (String) i;
             System.out.println(s + aae140MaxIssNum.get(s));
         }
-    }
-
-    public void s() {
-        System.out.println("哈哈哈哈");
     }
 }

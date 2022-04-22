@@ -1318,4 +1318,44 @@ public class Simple implements Question {
         }
         return true;
     }
+
+    /**
+     * 762. 二进制表示中质数个计算置位
+     * @param left
+     * @param right
+     * @return
+     */
+    public int countPrimeSetBits(int left, int right) {
+
+        int res = 0;
+        while (left <= right) {
+            int n = Integer.bitCount(left);
+            if (isPrime(n)) {
+                res++;
+            }
+            left++;
+        }
+        return res;
+    }
+    public int getOneBits(int n) {
+        int count = 0;
+        for (int i = 1; i < 32; ++i) {
+            if ((n & (1 << i)) == 1) {
+                count++;
+            }
+        }
+        return count;
+    }
+    public boolean isPrime(int n) {
+        if (n == 1)
+            return false;
+        if (n == 2 || n == 3)
+            return true;
+        for (int i = 2; i < n; ++i) {
+            if ((n % i) == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

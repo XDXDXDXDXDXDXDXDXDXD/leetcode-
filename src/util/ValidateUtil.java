@@ -1,5 +1,10 @@
 package util;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * @author Yanghz
  * @date 2021/9/4
@@ -30,5 +35,25 @@ public class ValidateUtil {
             return idCardY[res].equals(String.valueOf(cardArray[17]));
         }
         return false;
+    }
+
+    /*
+    验空
+     */
+    public static boolean isEmpty(Object obj) {
+
+        if (Objects.isNull(obj)) {
+            return true;
+        } else if (obj instanceof String) {
+            return ((String) obj).isEmpty();
+        } else if (obj instanceof Collection) {
+            return ((Collection<?>) obj).isEmpty();
+        } else if (obj instanceof Map) {
+            return ((Map<?, ?>) obj).isEmpty();
+        } else if (obj.getClass().isArray()) {
+            return Array.getLength(obj) == 0;
+        } else {
+            return false;
+        }
     }
 }

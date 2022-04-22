@@ -808,4 +808,21 @@ public class Middle implements Question {
         }
         return ans;
     }
+
+    /**
+     * 386.字典序排数
+     * @param n
+     * @return
+     */
+    public List<Integer> lexicalOrder(int n) {
+
+        int digital = 0, point = 10;
+        int temp = n;
+        while (temp >= 10) {
+            digital++;
+            temp = temp / point;
+            point = point * 10;
+        }
+        return new ArrayList<>();
+    }
 }
