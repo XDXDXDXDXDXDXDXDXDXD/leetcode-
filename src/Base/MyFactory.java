@@ -1,6 +1,6 @@
 package Base;
 
-import stream.StreamOperation;
+import Base.stream.StreamOperation;
 
 /**
  * @author Yanghz

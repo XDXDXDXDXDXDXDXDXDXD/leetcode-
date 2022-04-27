@@ -1,5 +1,4 @@
-import Base.MyEnum;
-import stream.User;
+import Base.stream.User;
 
 import java.util.*;
 import java.util.function.Function;
@@ -8,14 +7,10 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        String a = """
-                weroewrjwr
-                    2342343
-                """;
-        System.out.println(a);
-
-        switch (a) {
-        }
+        List<String> list = List.of();
+        List<String> strings = List.copyOf(list);
+        List<String> list2 = Arrays.asList("1", "2");
+        List<String> strings2 = List.copyOf(list2);
 
     }
 
