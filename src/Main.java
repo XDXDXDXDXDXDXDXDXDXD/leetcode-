@@ -1,17 +1,31 @@
-import Base.stream.User;
+import base.stream.User;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        List<String> list = List.of();
-        List<String> strings = List.copyOf(list);
-        List<String> list2 = Arrays.asList("1", "2");
-        List<String> strings2 = List.copyOf(list2);
+        Pattern reg = Pattern.compile("( ac01 )|( ac02 )|( ab01 )|( ab02 )|( ae01 )");
+        BufferedReader reader = new BufferedReader(new FileReader("./temp.txt"));
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            Matcher matcher = reg.matcher(line);
+            int count = matcher.groupCount();
+            while (matcher.find()) {
+                for (int i = 1; i <= count; ++i) {
 
+                }
+            }
+        }
     }
 
     /**

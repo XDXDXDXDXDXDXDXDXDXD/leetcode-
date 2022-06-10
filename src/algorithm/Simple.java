@@ -1,6 +1,6 @@
 package algorithm;
 
-import Base.dataStructure.Node;
+import base.dataStructure.Node;
 
 import java.util.*;
 
@@ -36,23 +36,23 @@ public class Simple implements Question {
             bucket[num]++;  //每出现一次频率加一
         }
         for (int i = 1; i < bucket.length; i++) {
-            bucket[i] += bucket[i-1];   //索引仍然是num，值变为比num小的数的个数
+            bucket[i] += bucket[i - 1];   //索引仍然是num，值变为比num小的数的个数
         }
-        int[] res  = new int[nums.length]; //输出结果
+        int[] res = new int[nums.length]; //输出结果
         for (int j = 0; j < nums.length; j++) {
-            if (nums[j] > 0) res[j] = bucket[nums[j]-1];     //比其小应该是下标为nums[j]-1的值,判断条件不可少，否则nums[j]-1为负
+            if (nums[j] > 0) res[j] = bucket[nums[j] - 1];     //比其小应该是下标为nums[j]-1的值,判断条件不可少，否则nums[j]-1为负
         }
         return res;
     }
 
     /*
-    *解压缩编码列表。.1313
-    *输入：nums = [1,2,3,4]
-    *输出：[2,4,4,4]
-    *解释：第一对 [1,2] 代表着 2 的出现频次为 1，所以生成数组 [2]。
-    *第二对 [3,4] 代表着 4 的出现频次为 3，所以生成数组 [4,4,4]。
-    *最后将它们串联到一起 [2] + [4,4,4] = [2,4,4,4]
-    * */
+     *解压缩编码列表。.1313
+     *输入：nums = [1,2,3,4]
+     *输出：[2,4,4,4]
+     *解释：第一对 [1,2] 代表着 2 的出现频次为 1，所以生成数组 [2]。
+     *第二对 [3,4] 代表着 4 的出现频次为 3，所以生成数组 [4,4,4]。
+     *最后将它们串联到一起 [2] + [4,4,4] = [2,4,4,4]
+     * */
     public int[] decompressRLElist(int[] nums) {
 
         int length = 0; //应该生成新数组的长度
@@ -64,7 +64,7 @@ public class Simple implements Question {
         for (int i = 0; i < nums.length; i += 2) {
             int count = nums[i];    //偶数索引代表个数
             while (count > 0) {
-                res[index] = nums[i+1];
+                res[index] = nums[i + 1];
                 count--;
                 index++;
             }
@@ -93,16 +93,16 @@ public class Simple implements Question {
     * */
     public int[] createTargetArray(int[] nums, int[] index) {
 
-         int [] target = new int[nums.length];
-         for(int i = 0; i < nums.length; i++){
-             if (index[i] < i) {    //当插入位置已经有值时，其后的元素一次后移
-                 for(int j = i; j > index[i]; j--){
-                     target[j]=target[j-1];
-                 }
-             }
-             target[index[i]]=nums[i];
-         }
-         return target;
+        int[] target = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            if (index[i] < i) {    //当插入位置已经有值时，其后的元素一次后移
+                for (int j = i; j > index[i]; j--) {
+                    target[j] = target[j - 1];
+                }
+            }
+            target[index[i]] = nums[i];
+        }
+        return target;
     }
 
     /*IP地址无效化 .1108
@@ -111,21 +111,20 @@ public class Simple implements Question {
     public String defangIPaddr(String address) {
 
         char[] cs = address.toCharArray();
-        char[] res = new char[address.length()+6];
+        char[] res = new char[address.length() + 6];
         int j = 0;
-        for (int i = 0; i < cs.length; i++, j++){
+        for (int i = 0; i < cs.length; i++, j++) {
             if (cs[i] == '.') {
                 res[j++] = '[';
                 res[j++] = '.';
                 res[j] = ']';
-            }
-            else res[j] = cs[i];
+            } else res[j] = cs[i];
         }
         return String.valueOf(res);
     }
 
     /*访问所有点的最小时间。.1266
-    *   平面上有 n 个点，点的位置用整数坐标表示 points[i] = [xi, yi]。请你计算访问所有这些点需要的最小时间（以秒为单位）。
+    *   平面上有n个点，点的位置用整数坐标表示points[i] = [xi, yi]。请你计算访问所有这些点需要的最小时间（以秒为单位）。
         你可以按照下面的规则在平面上移动：
         每一秒沿水平或者竖直方向移动一个单位长度，或者跨过对角线（可以看作在一秒内向水平和竖直方向各移动一个单位长度）。
         必须按照数组中出现的顺序来访问这些点*/
@@ -141,15 +140,22 @@ public class Simple implements Question {
         return ans;
     }
 
-    static class ListNode{
+    static class ListNode {
         int val;
         ListNode next;
-        ListNode(int x) { val = x; }
-        ListNode(int x, ListNode next) { val = x; this.next = next; }
+
+        ListNode(int x) {
+            val = x;
+        }
+
+        ListNode(int x, ListNode next) {
+            val = x;
+            this.next = next;
+        }
     }
 
     /*删除中间节点。.面02.03
-    * 实现一种算法，删除单向链表中间的某个节点（除了第一个和最后一个节点，不一定是中间节点），假定你只能访问该节点*/
+     * 实现一种算法，删除单向链表中间的某个节点（除了第一个和最后一个节点，不一定是中间节点），假定你只能访问该节点*/
     public void deleteNode(ListNode node) {
 
         node.val = node.next.val;
@@ -174,7 +180,7 @@ public class Simple implements Question {
     public int kthToLast(ListNode head, int k) {
 
         ListNode res = head, ref = head;
-        while (k-- > 0){
+        while (k-- > 0) {
             ref = ref.next;     //参考点先走k步
         }
         while (ref != null) {
@@ -221,10 +227,10 @@ public class Simple implements Question {
     }
 
     /*打印从1到最大的n位数。.面17
-    * 输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999*/
+     * 输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999*/
     public int[] printNumbers(int n) {
 
-        int l = (int) Math.pow(10,n) - 1;
+        int l = (int) Math.pow(10, n) - 1;
         int[] res = new int[l];
         for (int i = 0, k = 1; i < l; i++) {
             res[i] = k++;
@@ -233,11 +239,12 @@ public class Simple implements Question {
     }
 
     /*最小高度树。.面04.02
-    * 给定一个有序整数数组，元素各不相同且按升序排列，编写一个算法，创建一棵高度最小的二叉搜索树*/
+     * 给定一个有序整数数组，元素各不相同且按升序排列，编写一个算法，创建一棵高度最小的二叉搜索树*/
     public TreeNode sortedArrayToBST(int[] nums) {
 
-        return BSTHelper(nums, 0, nums.length -1);
+        return BSTHelper(nums, 0, nums.length - 1);
     }
+
     public TreeNode BSTHelper(int[] nums, int left, int right) {
 
         if (left > right) return null;
@@ -251,7 +258,7 @@ public class Simple implements Question {
     /*二叉树的深度。.面55 - 1*/
     public int maxDepth(TreeNode root) {
 
-        return root == null ? 0 : Math.max(maxDepth(root.left),maxDepth(root.right)) + 1;
+        return root == null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 
     /*有效的括号.20
@@ -302,7 +309,7 @@ public class Simple implements Question {
             }
         }
         return stack.size() == 0;*/
-        Map<Character,Character> map = new HashMap<>();
+        Map<Character, Character> map = new HashMap<>();
         map.put(')', '(');
         map.put('}', '{');
         map.put(']', '[');
@@ -324,7 +331,7 @@ public class Simple implements Question {
     }
 
     /*最大子序和.53
-    * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和*/
+     * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和*/
     public int maxSubArray(int[] nums) {
         //动态规划
         //将节点以结束位置作为子数组，则后一个节点的最大和总是与前一个相关
@@ -342,7 +349,7 @@ public class Simple implements Question {
     }
 
     /*合并两个有序链表
-    * 将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的*/
+     * 将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的*/
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 
         ListNode l3 = new ListNode(-1);
@@ -409,42 +416,42 @@ public class Simple implements Question {
     }
 
     /*分割平衡字符串
-    * 在一个「平衡字符串」中，'L' 和 'R' 字符的数量是相同的，给出一个平衡字符串 s，请你将它分割成尽可能多的平衡字符串
-    * 返回可以通过分割得到的平衡字符串的最大数量
-    * 输入：s = "RLLLLRRRLR"
-    * 输出：3*/
+     * 在一个「平衡字符串」中，'L' 和 'R' 字符的数量是相同的，给出一个平衡字符串 s，请你将它分割成尽可能多的平衡字符串
+     * 返回可以通过分割得到的平衡字符串的最大数量
+     * 输入：s = "RLLLLRRRLR"
+     * 输出：3*/
     public int balancedStringSplit(String s) {
-        int num = 0,res = 0;
+        int num = 0, res = 0;
         for (int i = 0; i < s.length(); ++i) {
-            num = s.charAt(i) == 'R' ? num+1 : num-1;
+            num = s.charAt(i) == 'R' ? num + 1 : num - 1;
             if (num == 0) res++;    //尽可能多，贪心，即只要有L和R数量相等的情况就分割
         }
         return res;
     }
 
     /*统计有序矩阵中的负数.1351
-    * 给你一个 m * n 的矩阵 grid，矩阵中的元素无论是按行还是按列，都以非递增顺序排列
-    * 请你统计并返回 grid 中 负数 的数目
-    * 输入：grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]],输出：8*/
+     * 给你一个 m * n 的矩阵 grid，矩阵中的元素无论是按行还是按列，都以非递增顺序排列
+     * 请你统计并返回 grid 中 负数 的数目
+     * 输入：grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]],输出：8*/
     public int countNegatives(int[][] grid) {
 
         int res = 0;
         for (int i = grid.length - 1; i >= 0; --i) {
 
-            for (int j = grid[0].length - 1; j >= 0; --j){
+            for (int j = grid[0].length - 1; j >= 0; --j) {
                 if (grid[i][j] < 0) {
                     res++;
                 }
 
-                if (grid[i][j] >= 0)   break;   //其之前的数都为正数
+                if (grid[i][j] >= 0) break;   //其之前的数都为正数
             }
         }
         return res;
     }
 
     /*
-    * 删除最外层的括号.1021
-    * */
+     * 删除最外层的括号.1021
+     * */
     public String removeOuterParentheses(String S) {
 
         //妙啊妙啊
@@ -459,10 +466,10 @@ public class Simple implements Question {
     }
 
     /*
-    * 将每个元素替换为右侧最大元素.1299
-    * 给你一个数组 arr ，请你将每个元素用它右边最大的元素替换，如果是最后一个元素，用 -1 替换
-    * 输入：arr = [17,18,5,4,6,1],输出：[18,6,6,6,1,-1]
-    * */
+     * 将每个元素替换为右侧最大元素.1299
+     * 给你一个数组 arr ，请你将每个元素用它右边最大的元素替换，如果是最后一个元素，用 -1 替换
+     * 输入：arr = [17,18,5,4,6,1],输出：[18,6,6,6,1,-1]
+     * */
     public int[] replaceElements(int[] arr) {
 
 //        方法一 暴力从前往后
@@ -497,12 +504,12 @@ public class Simple implements Question {
 //        return help;
 
         //方法三 从后往前遍历
-        int rightMax = arr[arr.length-1];
-        arr[arr.length-1] = -1;
-        for(int i = arr.length-2; i>=0; i--){
+        int rightMax = arr[arr.length - 1];
+        arr[arr.length - 1] = -1;
+        for (int i = arr.length - 2; i >= 0; i--) {
             int t = arr[i];
             arr[i] = rightMax;
-            if(t>rightMax){
+            if (t > rightMax) {
                 rightMax = t;
             }
         }
@@ -510,10 +517,10 @@ public class Simple implements Question {
     }
 
     /*
-    * 合并二叉树.617
-    * 给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠
-    * 你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，
-    * 否则不为 NULL 的节点将直接作为新二叉树的节点*/
+     * 合并二叉树.617
+     * 给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠
+     * 你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，
+     * 否则不为 NULL 的节点将直接作为新二叉树的节点*/
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
         if (t1 == null) return t2;
         if (t2 == null) return t1;
@@ -526,11 +533,12 @@ public class Simple implements Question {
     }
 
     /*
-    * 对称二叉树
-    * 给定一个二叉树，检查是否镜像对称*/
+     * 对称二叉树
+     * 给定一个二叉树，检查是否镜像对称*/
     public boolean isSymmetric(TreeNode root) {
         return isMirror(root, root);
     }
+
     public boolean isMirror(TreeNode t1, TreeNode t2) {
 
         if (t1 == null && t2 == null) return true;
@@ -538,16 +546,16 @@ public class Simple implements Question {
         //互为镜像有两个条件：
         // 1.根节点值相同
         // 2.左右子树互为镜像
-        return (t1.val == t2.val) && isMirror(t1.left, t2. right) && isMirror(t1.right, t2.left);
+        return (t1.val == t2.val) && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
     }
 
     /*
-    * 路径总和
-    * 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和*/
+     * 路径总和
+     * 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和*/
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) return false;
         sum -= root.val;
-        if (root.left == null && root.right == null){   //如果root为叶子节点则判断目标和是否为0
+        if (root.left == null && root.right == null) {   //如果root为叶子节点则判断目标和是否为0
             return sum == 0;
         }
         //否则继续遍历左右子树
@@ -555,9 +563,9 @@ public class Simple implements Question {
     }
 
     /*
-    * 汉明距离
-    * 两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。
-    * 给出两个整数 x 和 y，计算它们之间的汉明距离*/
+     * 汉明距离
+     * 两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。
+     * 给出两个整数 x 和 y，计算它们之间的汉明距离*/
     public int hammingDistance(int x, int y) {
         /*String xs = Integer.toBinaryString(x);
         String ys = Integer.toBinaryString(y);
@@ -591,8 +599,8 @@ public class Simple implements Question {
     }
 
     /*
-    * 从尾到头打印链表
-    * 输入链表头结点，从尾到头返回每个节点的值*/
+     * 从尾到头打印链表
+     * 输入链表头结点，从尾到头返回每个节点的值*/
     public int[] reversePrint(ListNode head) {
         Stack<ListNode> stack = new Stack<>();
         ListNode root = head;
@@ -613,6 +621,7 @@ public class Simple implements Question {
     /**
      * 整数反转 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转
      * 如果溢出返回0
+     *
      * @param x 给定整数
      * @return 反转结果
      */
@@ -633,6 +642,7 @@ public class Simple implements Question {
      * 删除排序数组中的重复项
      * 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度
      * 不要使用额外的数组空间，你必须在原地修改输入数组并在使用O(1)额外空间的条件下完成
+     *
      * @param nums 排序数组
      * @return 移除后数组的新长度
      */
@@ -652,6 +662,7 @@ public class Simple implements Question {
     /**
      * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
      * 你可以假设数组中无重复元素
+     *
      * @param nums
      * @param target
      * @return
@@ -662,11 +673,9 @@ public class Simple implements Question {
             int mid = left + ((right - left) >> 1);
             if (target == nums[mid]) {
                 return mid;
-            }
-            else if (target < nums[mid]) {
+            } else if (target < nums[mid]) {
                 right = mid - 1;
-            }
-            else {
+            } else {
                 left = mid + 1;
             }
         }
@@ -675,6 +684,7 @@ public class Simple implements Question {
 
     /**
      * 多数元素
+     *
      * @param nums
      * @return
      */
@@ -711,7 +721,7 @@ public class Simple implements Question {
         for (int i = 1; i <= chars.length; ++i) {
             char t = chars[i - 1];
             // 2以下数字不需压缩
-            if (t == 48 || (t <= 50 && t >= 48 && (chars[i] > 57 || chars[i] < 48) )) {
+            if (t == 48 || (t <= 50 && t >= 48 && (chars[i] > 57 || chars[i] < 48))) {
                 System.out.println("!error");
                 return;
             }
@@ -740,11 +750,11 @@ public class Simple implements Question {
 
     /**
      * 罗马数字转整数
+     *
      * @param s roman数字
      * @return 转换后的整数
      */
     public Integer romanToInteger(String s) {
-
 
 
         return 1;
@@ -752,6 +762,7 @@ public class Simple implements Question {
 
     /**
      * 1791.找出星型图的中心节点
+     *
      * @param edges 表示星型图二维数组
      * @return 编号
      */
@@ -773,9 +784,10 @@ public class Simple implements Question {
 
     /**
      * 717.1比特与2比特字符
-     *
+     * <p>
      * 因为只有10,11,0组合，所以只需看最后一位0前有多少个连续的1，如果是偶数个（[...0,0]也符合），则可以全部匹配为11。
      * 否则必然最后是10
+     *
      * @param bits 表示字符的数组
      * @return 最后以为是否必须为1位字符
      */
@@ -786,7 +798,7 @@ public class Simple implements Question {
         }
 
         int p = 0;
-        for(int i = bits.length - 2; i >= 0; --i) {
+        for (int i = bits.length - 2; i >= 0; --i) {
             if (bits[i] == 1) {
                 p++;
             } else {
@@ -799,6 +811,7 @@ public class Simple implements Question {
 
     /**
      * 岛屿数量
+     *
      * @param grid
      * @return
      */
@@ -808,6 +821,7 @@ public class Simple implements Question {
 
     /**
      * 917.仅仅翻转字母
+     *
      * @param s
      * @return
      */
@@ -837,6 +851,7 @@ public class Simple implements Question {
         }
         return String.valueOf(chars);
     }
+
     private boolean isLetter(char c) {
         return (c < 65 || c > 90) && (c < 97 || c > 122);
     }
@@ -878,6 +893,7 @@ public class Simple implements Question {
 
     /**
      * 283.移动0
+     *
      * @param nums
      */
     public void moveZeroes(int[] nums) {
@@ -895,11 +911,12 @@ public class Simple implements Question {
 
     /**
      * 反转字符串
+     *
      * @param s
      */
     public void reverseString(char[] s) {
         int left = 0, right = s.length - 1;
-        while(left < right) {
+        while (left < right) {
             char t = s[left];
             s[left] = s[right];
             s[right] = t;
@@ -910,6 +927,7 @@ public class Simple implements Question {
 
     /**
      * 反转字符串中的单词
+     *
      * @param s
      * @return
      */
@@ -934,6 +952,7 @@ public class Simple implements Question {
 
     /**
      * 876.链表的中间节点
+     *
      * @param head
      * @return
      */
@@ -950,6 +969,7 @@ public class Simple implements Question {
 
     /**
      * 258.各位相加
+     *
      * @param num
      * @return
      */
@@ -969,6 +989,7 @@ public class Simple implements Question {
 
     /**
      * 231.2的幂.见常用知识点一.2.2位运算
+     *
      * @param n
      * @return
      */
@@ -979,6 +1000,7 @@ public class Simple implements Question {
 
     /**
      * 191.位1的个数
+     *
      * @param n
      * @return
      */
@@ -995,9 +1017,10 @@ public class Simple implements Question {
 
     /**
      * 733.图像渲染
-     * @param image 染色后的图案
-     * @param sr 起始x
-     * @param sc 起始y
+     *
+     * @param image    染色后的图案
+     * @param sr       起始x
+     * @param sc       起始y
      * @param newColor 新颜色
      * @return
      */
@@ -1036,6 +1059,7 @@ public class Simple implements Question {
 
     /**
      * 589.N叉树的前序遍历
+     *
      * @param root
      * @return
      */
@@ -1045,7 +1069,8 @@ public class Simple implements Question {
         preorderRc(root, res);
         return res;
     }
-    private void preorderRc (Node node, List<Integer> res) {
+
+    private void preorderRc(Node node, List<Integer> res) {
 
         if (node == null) {
             return;
@@ -1060,8 +1085,9 @@ public class Simple implements Question {
     /**
      * 599.两个列表的最小索引总和
      * 假设 Andy 和 Doris 想在晚餐时选择一家餐厅，并且他们都有一个表示最喜爱餐厅的列表，每个餐厅的名字用字符串表示。
-     *
+     * <p>
      * 你需要帮助他们用最少的索引和找出他们共同喜爱的餐厅。 如果答案不止一个，则输出所有答案并且不考虑顺序。 你可以假设答案总是存在。
+     *
      * @param list1
      * @param list2
      * @return
@@ -1099,6 +1125,7 @@ public class Simple implements Question {
 
     /**
      * 720.词典中最长的单词
+     *
      * @param words
      * @return
      */
@@ -1128,6 +1155,7 @@ public class Simple implements Question {
 
     /**
      * 606.根据二叉树创建字符串
+     *
      * @param root
      * @return
      */
@@ -1138,6 +1166,7 @@ public class Simple implements Question {
 
         return builder.toString();
     }
+
     private void tree2strDfs(TreeNode root, StringBuilder builder) {
 
         if (root == null)
@@ -1164,6 +1193,7 @@ public class Simple implements Question {
 
     /**
      * 653. 两数之和 IV - 输入 BST
+     *
      * @param root
      * @param k
      * @return
@@ -1177,7 +1207,7 @@ public class Simple implements Question {
             Integer left = list.get(i);
             Integer right = list.get(j);
             if (left + right == k) return true;
-            if ((left + right) > k)  {
+            if ((left + right) > k) {
                 j--;
             } else {
                 i++;
@@ -1185,6 +1215,7 @@ public class Simple implements Question {
         }
         return false;
     }
+
     private void inorder(TreeNode root, List<Integer> list) {
         if (root == null) {
             return;
@@ -1196,6 +1227,7 @@ public class Simple implements Question {
 
     /**
      * 661. 图片平滑器
+     *
      * @param img
      * @return
      */
@@ -1228,7 +1260,8 @@ public class Simple implements Question {
 
     /**
      * 682. 棒球比赛
-     * @param ops  ["5","2","C","D","+"]
+     *
+     * @param ops ["5","2","C","D","+"]
      * @return
      */
     public int calPoints(String[] ops) {
@@ -1262,6 +1295,7 @@ public class Simple implements Question {
     /**
      * 693. 交替位二进制数
      * 给定一个正整数，检查它的二进制表示是否总是 0、1 交替出现：换句话说，就是二进制表示中相邻两位的数字永不相同。
+     *
      * @param n
      * @return
      */
@@ -1283,12 +1317,14 @@ public class Simple implements Question {
 
         return true;
     }
+
     public static int getCount(int n) {
         return (int) Math.sqrt(Integer.highestOneBit(n));
     }
 
     /**
      * 728. 自除数
+     *
      * @param left
      * @param right
      * @return
@@ -1303,6 +1339,7 @@ public class Simple implements Question {
         }
         return res;
     }
+
     public static boolean isSelf(int num) {
         if (num < 10) {
             return true;
@@ -1322,6 +1359,7 @@ public class Simple implements Question {
 
     /**
      * 762. 二进制表示中质数个计算置位
+     *
      * @param left
      * @param right
      * @return
@@ -1338,6 +1376,7 @@ public class Simple implements Question {
         }
         return res;
     }
+
     public int getOneBits(int n) {
         int count = 0;
         for (int i = 1; i < 32; ++i) {
@@ -1347,6 +1386,7 @@ public class Simple implements Question {
         }
         return count;
     }
+
     public boolean isPrime(int n) {
         if (n == 1)
             return false;
@@ -1358,5 +1398,20 @@ public class Simple implements Question {
             }
         }
         return true;
+    }
+
+    /*
+    1037. 有效的回旋镖
+    给定一个数组points，其中points[i] = [xi, yi]表示 X-Y 平面上的一个点，如果这些点构成一个回旋镖则返回true。
+
+    回旋镖定义为一组三个点，这些点各不相同且不在一条直线上。
+        方法：向量的叉积，不为同一直线即两个向量的叉积不为0
+     */
+    public boolean isBoomerang(int[][] points) {
+
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+
+        return v1[0] * v2[1] - v1[1] * v2[0] != 0;
     }
 }
