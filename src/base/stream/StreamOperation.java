@@ -1,5 +1,7 @@
 package base.stream;
 
+import util.ValidateUtil;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,7 +11,7 @@ import java.util.stream.Collectors;
  * @author hanzhi
  * @date 2021/5/22
  */
-public class StreamOperation {
+public class StreamOperation <T extends User> {
 
     private List<User> users = new ArrayList<>();
 
@@ -227,5 +229,18 @@ public class StreamOperation {
             b.append("\n");
         }
         return b.toString();
+    }
+
+    /*
+    泛型去重 T extends User
+     */
+    public List<T> filterDup(List<T> list) {
+        return list.stream().filter(i -> !ValidateUtil.isEmpty(i.getName()))
+                .collect(Collectors.collectingAndThen(Collectors.toCollection(
+                    () -> new TreeSet<>(Comparator.comparing(
+                            T::getName
+                    ))
+            ), ArrayList::new
+        ));
     }
 }

@@ -60,3 +60,97 @@ public class BuyHouse {
         System.out.println(betweenMonth);
     }
 }
+
+/*
+sql. 地址：navicat localhost_5432.test.public.providentFundAccount
+ */
+
+/*
+
+-- 表结构
+create table ProvidentFundAccount(
+issue INTEGER, --期号
+money DECIMAL, --缴存金额
+months INTEGER, --缴存月份数
+total DECIMAL, --账户总金额
+maxLoan DECIMAL --当前可公积金贷款金额
+);
+
+comment on column providentFundAccount.issue is '期号';
+comment on column providentFundAccount.money is '缴存金额';
+comment on column providentFundAccount.months is '缴存月份数（自开始缴存起逐月递增）';
+comment on column providentFundAccount.total is '账户总金额';
+comment on column providentFundAccount.maxLoan is '当前可公积金贷款金额';
+
+-- 序列、触发器
+create sequence SEQ_MONTHS
+minvalue 1
+maxValue 9999
+increment 1
+start with 1;
+
+create sequence SEQ_ACCOUNTID
+minvalue 1
+maxValue 9999
+increment 1
+start with 1;
+
+CREATE OR REPLACE TRIGGER TRG_MONTHS
+BEFORE INSERT ON p
+FOR EACH ROW
+BEGIN
+SELECT seq_user_id.nextval INTO :new.id FROM dual;
+END;
+
+create trigger tri_calculateMaxLoan after INSERT
+on providentFundAccount
+for each row
+begin
+UPDATE providentfundaccount a
+SET maxloan = ( SELECT SUM ( money * months * 0.9 ) FROM providentfundaccount b WHERE b.months <= a.months )
+where
+
+--⭐⭐⭐⭐⭐计算可公积金贷款金额⭐⭐⭐⭐⭐
+UPDATE providentfundaccount a
+SET maxloan = ( SELECT SUM ( money * months * 0.9 ) FROM providentfundaccount b WHERE b.months <= a.months )
+
+-- 触发器（待定）
+create or replace trigger tri_calculateMaxLoan
+after insert
+on providentFundAccount
+for each row -- 行级触发器
+-- 每次新增公积金缴存数据都计算下可贷款金额
+begin
+  UPDATE providentfundaccount a
+  SET maxloan = ( SELECT SUM ( money * months * 0.9 ) FROM providentfundaccount b WHERE b.months <= a.months );
+end;
+
+ */
+
+
+/*
+--数据
+insert into providentFundAccount values(202007, 780, 1, 780, null);
+insert into providentFundAccount values(202008, 780, 2, 1560, null);
+insert into providentFundAccount values(202009, 780, 3, 2340, null);
+insert into providentFundAccount values(202010, 780, 4, 3120, null);
+insert into providentFundAccount values(202011, 780, 5, 3900, null);
+insert into providentFundAccount values(202012, 780, 6, 4680, null);
+insert into providentFundAccount values(202101, 780, 7, 5460, null);
+insert into providentFundAccount values(202102, 780, 8, 6240, null);
+insert into providentFundAccount values(202103, 780, 9, 7020, null);
+insert into providentFundAccount values(202104, 780, 10, 7800, null);
+insert into providentFundAccount values(202105, 960, 11, 8760, null);
+insert into providentFundAccount values(202106, 960, 12, 9720, null);
+insert into providentFundAccount values(202107, 960, 13, 10680, null);
+insert into providentFundAccount values(202108, 960, 14, 11640, null);
+insert into providentFundAccount values(202109, 960, 15, 12600, null);
+insert into providentFundAccount values(202110, 960, 16, 13560, null);
+insert into providentFundAccount values(202111, 960, 17, 14520, null);
+insert into providentFundAccount values(202112, 960, 18, 15480, null);
+insert into providentFundAccount values(202201, 960, 19, 16440, null);
+insert into providentFundAccount values(202202, 960, 20, 17400, null);
+insert into providentFundAccount values(202203, 960, 21, 18360, null);
+insert into providentFundAccount values(202204, 960, 22, 19320, null);
+insert into providentFundAccount values(202205, 1140, 23, 20527.35, null);
+ */
